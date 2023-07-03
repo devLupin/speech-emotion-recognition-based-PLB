@@ -51,7 +51,7 @@
 
 |Name|#Params|max_WA(%)|min_WA(%)|avg_WA(%)|code|loss curve|Visualization|
 |----|----------|---------|---------|---------|-------|------------------|-------------|
-|proposed|93,937|90.00|80.00|56.69|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/proposed.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/proposed.ipynb)|
+|proposed|93,937|90.00|80.00|85.69|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/proposed.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/proposed.ipynb)|
 |capsule|69,361|75.62|64.38|69.56|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20capsule.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/remove_capsule.ipynb)|
 |SA|93,808|87.50|79.38|83.81|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20sa.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/remove_sa.ipynb)|
 |reshape|68,337|78.75|65.62|72.19|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20reshape.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/remove_reshape.ipynb)|
