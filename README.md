@@ -43,15 +43,15 @@
 |capsule|69,296|96.87|78.72|83.83|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20capsule.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/visualization/remove_dynamic-routing.ipynb)|
 |SA|93,743|93.67|82.66|88.00|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20sa.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/visualization/remove_sa.ipynb)|
 |reshape|68,272|84.65|72.39|76.87|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20reshape.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/visualization/remove_reshape.ipynb)|
-|CBAM, Spa|-|-|-|-|Link|Link|Link|
-|CBAM|89,476|96.05|79.26|87.54|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20front%20CBAM.ipynb)|Link|Link|
-|Spa|93,770|96.05|79.26|87.54|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20spatial.ipynb)|Link|Link|
+|CBAM, Spa|89,476|96.05|79.26|87.54|Link|Link|Link|
+|CBAM|-|-|-|-|Link|Link|Link|
+|Spa|-|-|-|-|Link|Link|Link|
 
 - <span style="color:blue">**RAVDESS**</span>
 
 |Name|#Params|max_WA(%)|min_WA(%)|avg_WA(%)|code|loss curve|Visualization|
 |----|----------|---------|---------|---------|-------|------------------|-------------|
-|proposed|93,872|96.05|83.09|89.09|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/proposed.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/proposed.ipynb)|
+|proposed|93,937|90.00|80.00|56.69|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/proposed.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/proposed.ipynb)|
 |capsule|69,361|75.62|64.38|69.56|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20capsule.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/remove_capsule.ipynb)|
 |SA|93,808|87.50|79.38|83.81|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20sa.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/remove_sa.ipynb)|
 |reshape|68,337|78.75|65.62|72.19|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20reshape.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/remove_reshape.ipynb)|
