@@ -43,9 +43,9 @@
 |capsule|69,296|96.87|78.72|83.83|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20capsule.ipynb)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/7#issuecomment-1635467095)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/visualization/remove_dynamic-routing.ipynb)|
 |SA|93,743|93.67|82.66|88.00|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20sa.ipynb)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/7#issuecomment-1635468522)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/visualization/remove_sa.ipynb)|
 |reshape|68,272|84.65|72.39|76.87|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20reshape.ipynb)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/7#issuecomment-1635469062)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/visualization/remove_reshape.ipynb)|
-|CBAM, Spa|89,476|96.05|79.26|87.54|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/7#issuecomment-1635469763)|Link|
+|CBAM, Spa|89,476|96.05|79.26|87.54|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20CBAM.ipynb)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/7#issuecomment-1635469763)|Link|
 |CBAM|-|-|-|-|Link|Link|Link|
-|Spa|-|-|-|-|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/7#issuecomment-1635470553)|Link|
+|Spa|93,770|96.05|82.66|88.18|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/EMO-DB/training/remove%20spatial.ipynb)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/7#issuecomment-1635470553)|Link|
 
 - <span style="color:blue">**RAVDESS**</span>
 
@@ -63,7 +63,13 @@
 
 |Name|#Params|max_WA(%)|min_WA(%)|avg_WA(%)|code|loss curve|Visualization|
 |----|----------|---------|---------|---------|-------|------------------|-------------|
-|proposed|93,677|70.56|63.59|66.22|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/IEMOCAP/training/proposed.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/IEMOCAP/visualization/proposed.ipynb)|
+|proposed|93,677|70.56|63.59|66.22|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/IEMOCAP/training/proposed.ipynb)|[Link](https://github.com/devLupin/Improved-RoutingConvNet/issues/8#issue-1804422136)|Link|
+|capsule|69,101|67.88|62.63|65.04|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/IEMOCAP/training/remove%20capsule.ipynb)|Link|Link|
+|SA|93,548|69.09|62.90|65.95|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/IEMOCAP/training/remove%20sa.ipynb)|Link|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/visualization/remove_sa.ipynb)|
+|reshape|68,337|63.09|58.98|61.23|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20reshape.ipynb)|Link|Link|
+|CBAM, Spa|89,541|69.17|62.92|66.46|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20cbam%2C%20spatial-attention.ipynb)|Link|Link|
+|CBAM|-|-|-|-|Link|Link|Link|
+|Spa|93,835|68.82|63.43|65.78|[Link](https://github.com/devLupin/Improved-RoutingConvNet/blob/main/RAVDESS/training/remove%20spatial.ipynb)|Link|Link|
 
 
 ## 04. Experiments - Real-time
