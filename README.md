@@ -100,3 +100,7 @@
 |Model|Num.Params|Peak memory usage(GB)|Model size(Mb)|
 |-----|----------|---------------------|--------------|
 |Proposed|93K|0.000627|0.433616|
+
+
+## License
+Non-commercial only
