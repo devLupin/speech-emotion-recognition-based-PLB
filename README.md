@@ -15,11 +15,11 @@
 
 - Model
 
-<p align="center"><img src="imgs/model.png" height="100px" width="500px"></p>
+<!-- <p align="center"><img src="imgs/model.png" height="100px" width="500px"></p> -->
 
 - legend
 
-<p align="center"><img src="imgs/legend.png" height="100px" width="200px"></p>
+<!-- <p align="center"><img src="imgs/legend.png" height="100px" width="200px"></p> -->
 
 
 ## 03. Experiments - Performance

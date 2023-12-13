@@ -10,6 +10,7 @@ import keras.backend as K
 from tensorflow.keras.optimizers import Adam
 from tqdm.auto import tqdm
 import os
+from Config import Config
 import numpy as np
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.metrics import Mean, CategoricalAccuracy
@@ -22,6 +23,8 @@ from tensorflow.keras.losses import CategoricalCrossentropy, MeanSquaredError
 import tensorflow as tf
 tf.config.run_functions_eagerly(True)
 
+import warnings
+warnings.filterwarnings('always')
 
 
 def PrimaryCapssquash(vectors, axis=-1):
@@ -34,8 +37,7 @@ def PrimaryCapssquash(vectors, axis=-1):
     s_squared_norm = K.sum(K.square(vectors), axis, keepdims=True)
     scale = s_squared_norm / (1 + s_squared_norm) / K.sqrt(s_squared_norm + K.epsilon())
     return scale * vectors
-
-
+  
 def DigitCapssquash(Value, axis = -1):
     """
         Squash activation in PrimaryCaps
@@ -45,16 +47,14 @@ def DigitCapssquash(Value, axis = -1):
     Proportion = Square_Vector / (1 + Square_Vector) / K.sqrt(Square_Vector + K.epsilon())
     Output = Proportion * Value
     return Output
-
-
+  
 def softmax(x, axis=-1):
     """
         softmax in Dynamic Routings
     """ 
     ex = K.exp(x - K.max(x, axis=axis, keepdims=True))
     return ex/K.sum(ex, axis=axis, keepdims=True)
-
-
+  
 class Capsule(tf.keras.layers.Layer):
     def __init__(self, num_capsule, dim_capsule, routings=3, share_weights=True, activation='squash', **kwargs):
         super(Capsule, self).__init__(**kwargs)
@@ -123,8 +123,7 @@ class Capsule(tf.keras.layers.Layer):
 
     def compute_output_shape(self, input_shape):
         return (None, self.num_capsule, self.dim_capsule)
-    
-
+      
 class SpatialGate(tf.keras.Model):
   def __init__(self):
     super(SpatialGate, self).__init__()
@@ -144,8 +143,7 @@ class SpatialGate(tf.keras.Model):
      
      scale = tf.math.sigmoid(x_out) # broadcasting
      return x * scale
- 
- 
+   
 class ChannelGate(tf.keras.Model):
 
   def __init__(self, gate_channels):
@@ -173,8 +171,7 @@ class ChannelGate(tf.keras.Model):
     scale = tf.tile(scale, [1, x.shape[1], x.shape[2], 1])  # # expand_as in Pytorch
     
     return x * scale
-
-
+  
 class CBAM(tf.keras.Model):
 
   def __init__(self, gate_channels):
@@ -185,16 +182,15 @@ class CBAM(tf.keras.Model):
     x_out = self.ChannelGate(x)
     x_out = self.SpatialGate(x_out)
     return x_out
-
-
+  
 class PrimaryCap(tf.keras.Model):
 
-  def __init__(self, dim_capsule=64, n_channels=6, kernel_size=3, strides=1, padding='valid'):
+  def __init__(self, dim_capsule=64, n_channels=6, kernel_size=3):
     super().__init__()
     
     self.conv = Sequential([
         # depthwise-separable Conv2D
-        DepthwiseConv2D(kernel_size=kernel_size, strides=strides, padding=padding),
+        DepthwiseConv2D(kernel_size=kernel_size, dilation_rate=(2,2)),
         Conv2D(filters=dim_capsule*n_channels, kernel_size=1),
         
         Reshape(target_shape=[-1, dim_capsule]),
@@ -203,140 +199,3 @@ class PrimaryCap(tf.keras.Model):
     
   def call(self, inputs):
     return self.conv(inputs)
-
-
-class Model(tf.keras.Model):
-
-  def __init__(self, num_classes):
-    super().__init__()
-    
-    self.conv1 = Sequential([
-      Conv2D(filters=64, kernel_size=3),
-      BatchNormalization(axis=1),
-      Activation('elu'),
-      AveragePooling2D(),
-      SpatialDropout2D(0.2)
-    ])
-    
-    self.conv2 = Sequential([
-      Conv2D(filters=64, kernel_size=3, dilation_rate=2),
-      BatchNormalization(axis=1),
-      Activation('elu'),
-      AveragePooling2D(),
-      SpatialDropout2D(0.2),
-    ])
-    
-    self.cbam = CBAM(64) # sharing
-    
-    self.primarycap = PrimaryCap()
-    self.spatial_attn = SpatialGate()
-    
-    self.attention = Attention(use_scale=True)
-    self.LN = LayerNormalization()
-    
-    self.lamb = Lambda(lambda x: tf.multiply(x[0], x[1]))
-    
-    self.capsule = Capsule(6,64,3,True)
-    self.gap = GlobalAveragePooling1D()
-    self.dropout = Dropout(0.2)
-    self.classifier = Dense(num_classes, activation='softmax')
-    
-    
-  def call(self, inputs):
-    x = inputs
-    
-    cap = self.conv1(x)
-    cap = cap + self.cbam(cap)
-    cap = self.conv2(cap)
-    cap = cap + self.cbam(cap)
-    
-    primarycaps = self.primarycap(cap)
-    primarycaps = tf.expand_dims(primarycaps, axis=-1)
-    primarycaps = primarycaps + self.spatial_attn(primarycaps)
-    primarycaps = tf.squeeze(primarycaps, axis=-1)
-    
-    cap = primarycaps
-    
-    sa = self.attention([primarycaps, primarycaps, primarycaps])
-    sa = self.LN(sa)
-    
-    sa = tf.expand_dims(sa, axis=-1)
-    sa = sa + self.spatial_attn(sa)
-    sa = tf.squeeze(sa, axis=-1)
-    
-    cap = self.lamb([cap, sa])
-    cap = tf.expand_dims(cap, axis=-1)
-    cap = cap + self.spatial_attn(cap)
-    cap = tf.squeeze(cap, axis=-1)
-    
-    capsule = self.capsule(cap)
-    capsule = tf.expand_dims(capsule, axis=-1)
-    capsule = capsule + self.spatial_attn(capsule)
-    capsule = tf.squeeze(capsule, axis=-1)
-    
-    gap = self.gap(capsule)
-    drop = self.dropout(gap)
-    
-    output_softmax = self.classifier(drop)
-    return output_softmax
-  
-  
-class Model2(tf.keras.Model):
-
-  def __init__(self, num_classes):
-    super().__init__()
-    
-    self.conv1 = Sequential([
-      Conv2D(filters=64, kernel_size=3),
-      BatchNormalization(axis=1),
-      Activation('elu'),
-      AveragePooling2D(),
-      SpatialDropout2D(0.2)
-    ])
-    
-    self.conv2 = Sequential([
-      Conv2D(filters=64, kernel_size=3, dilation_rate=2),
-      BatchNormalization(axis=1),
-      Activation('elu'),
-      AveragePooling2D(),
-      SpatialDropout2D(0.2),
-    ])
-    
-    self.cbam = CBAM(64) # sharing
-    
-    self.primarycap = PrimaryCap()
-    self.spatial_attn = SpatialGate()
-    
-    self.lamb = Lambda(lambda x: tf.multiply(x[0], x[1]))
-    
-    self.capsule = Capsule(6,64,3,True)
-    self.gap = GlobalAveragePooling1D()
-    self.dropout = Dropout(0.2)
-    self.classifier = Dense(num_classes, activation='softmax')
-    
-    
-  def call(self, inputs):
-    x = inputs
-    
-    cap = self.conv1(x)
-    cap = cap + self.cbam(cap)
-    cap = self.conv2(cap)
-    cap = cap + self.cbam(cap)
-    
-    primarycaps = self.primarycap(cap)
-    primarycaps = tf.expand_dims(primarycaps, axis=-1)
-    primarycaps = primarycaps + self.spatial_attn(primarycaps)
-    primarycaps = tf.squeeze(primarycaps, axis=-1)
-    
-    cap = primarycaps
-    
-    capsule = self.capsule(cap)
-    capsule = tf.expand_dims(capsule, axis=-1)
-    capsule = capsule + self.spatial_attn(capsule)
-    capsule = tf.squeeze(capsule, axis=-1)
-    
-    gap = self.gap(capsule)
-    drop = self.dropout(gap)
-    
-    output_softmax = self.classifier(drop)
-    return output_softmax
