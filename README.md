@@ -1,5 +1,7 @@
-# Imporoved RoutingConvNet
+# A Light-weight Model for Speech Emotion Recognition based on Pattern Learning Block
 <hr>
+
+[Paper(Korean)](paper.pdf)
 
 
 ## 01. Data preprocessing
