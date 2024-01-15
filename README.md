@@ -1,4 +1,4 @@
-# A Light-weight Model for Speech Emotion Recognition based on Pattern Learning Block
+# A Light-weight Model for Speech Emotion Recognition based on Pattern Learning Block([PDF](https://drive.google.com/file/d/1KqAs1fCs856QRvU4TzJyRAl35mtB3y4s/view?usp=drive_link))
 <hr>
 
 [Paper(Korean)](paper.pdf)
